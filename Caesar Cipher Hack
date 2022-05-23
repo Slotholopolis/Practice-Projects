@@ -1,0 +1,21 @@
+from ast import Sub
+
+print('Enter the encrypted Caesar cipher message to hack.')
+message = input('> ')
+
+Symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+for key in range (len(Symbols)):
+    translated = ''
+
+    for symbol in message:
+        if symbol in Symbols:
+            num = Symbols.find(symbol)
+            num = num - key
+            if num < 0:
+                num = num + len (Symbols)
+            
+            translated = translated + Symbols [num]
+        else:
+            translated = translated + symbol
+    print('Key #{}: {}'.format(key, translated))
