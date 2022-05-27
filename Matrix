@@ -1,0 +1,33 @@
+import random, shutil, sys, time
+
+min_stream_length = 1
+max_stream_length = 3
+pause = .1
+stream_chars = ['0', '1']
+
+density = 0.08
+
+width = shutil.get_terminal_size()[0]
+width -= 1
+
+print('Digital Stream, Press Ctrl-C to quit.')
+time.sleep(2)
+
+try:
+    columns = [0] * width
+    while True:
+        for i in range(width):
+            if columns[1] == 0:
+                if random.random() <= density:
+                    columns[1] = random.randint(min_stream_length, max_stream_length)
+
+            if columns[1] > 0:
+                print(random.choice(stream_chars), end='')
+                columns[1] -= 1
+            else:
+                print(' ', end='')
+        print()
+        sys.stdout.flush()
+        time.sleep(pause)
+except KeyboardInterrupt:
+    sys.exit()
